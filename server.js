@@ -26,6 +26,6 @@ app.get('/people/:person', function (req, res, next) {
   }
 });
 
-app.listen(8000, function () {
-  console.log("== Server listening on port 8000");
+app.listen(3001, function () {
+  console.log("== Server listening on port 3001");
 })
