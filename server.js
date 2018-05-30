@@ -5,7 +5,9 @@ var exphbs = require('express-handlebars');
 var peopleData = require('./peopleData');
 
 var app = express();
-app.engine('handlebars', exphbs());
+var port = process.env.PORT || 3000;
+
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
 app.use(express.static('public'));
@@ -36,7 +38,9 @@ app.get('/test', function (req, res, next) {
 });
 
 app.get('/people', function (req, res, next) {
-  res.status(200).sendFile(__dirname + '/public/people.html');
+  res.status(200).render('peoplePage', {
+    people: peopleData
+  });
 });
 
 // var availablePeople = [
@@ -55,6 +59,6 @@ app.get('/people/:person', function (req, res, next) {
   }
 });
 
-app.listen(3001, function () {
-  console.log("== Server listening on port 3001");
+app.listen(port, function () {
+  console.log("== Server listening on port", port);
 })
